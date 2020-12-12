@@ -8,9 +8,9 @@ export const FightSchema = new mongoose.Schema(
     enemyPigId: { type: String, length: 32, required: true },
     pigInfo: { type: Object, required: true },
     enemyPigInfo: { type: Object, required: true },
-    processes: { type: mongoose.Types.Array, required: true },
+    processes: { type: Array, required: true },
     randomSeed: { type: Number, required: true },
-    rewards: { type: mongoose.Types.Array, required: true },
+    rewards: { type: Array, required: true },
   },
   {
     timestamps: true,

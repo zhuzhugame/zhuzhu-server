@@ -2,11 +2,13 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import * as _ from 'lodash';
 import { FightDao } from '../../dao/fight.dao';
 import { FightArchiveDao } from '../../dao/fightArchive.dao';
 import { makeId } from '../../util/util';
+import { FightStatVo } from '../../vo/fight.vo';
 import { PigService } from '../pig/pig.service';
 
 @Injectable()
@@ -16,6 +18,13 @@ export class FightService {
     private readonly fightArchiveDao: FightArchiveDao,
     private readonly pigService: PigService,
   ) {}
+
+  async stat(pigId: string): Promise<FightStatVo> {
+    const fight = await this.fightDao.find({ pigId });
+    if (!fight) throw new NotFoundException();
+    const { pigInfo, enemyPigInfo, processes } = fight;
+    return { pigInfo, enemyPigInfo, processes };
+  }
 
   async start(pigId: string, enemyPigId: string): Promise<void> {
     if (pigId === enemyPigId) throw new BadRequestException();

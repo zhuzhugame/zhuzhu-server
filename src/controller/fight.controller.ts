@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
@@ -13,6 +14,7 @@ import { User } from '../decorator/user.decorator';
 import { FightSaveDto, FightStartDto } from '../dto/fight.dto';
 import { FightService } from '../service/fight/fight.service';
 import { AuthUser } from '../vo/auth.vo';
+import { FightStatVo } from '../vo/fight.vo';
 
 @ApiTags('fight')
 @ApiBearerAuth()
@@ -20,6 +22,11 @@ import { AuthUser } from '../vo/auth.vo';
 @Controller('fights')
 export class FightController {
   constructor(private readonly fightService: FightService) {}
+
+  @Get('stat')
+  async stat(@User() user: AuthUser): Promise<FightStatVo> {
+    return this.fightService.stat(user.pigId);
+  }
 
   @HttpCode(HttpStatus.OK)
   @Post('start')
