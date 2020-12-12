@@ -4,7 +4,7 @@ import { PassportModule } from '@nestjs/passport';
 import { CONFIG } from '../config';
 import { AuthService } from '../service/auth/auth.service';
 import { JwtStrategy } from '../service/auth/jwt.strategy';
-import { FightService } from '../service/fight/Fight.service';
+import { FightService } from '../service/fight/fight.service';
 import { FriendService } from '../service/friend/friend.service';
 import { PigService } from '../service/pig/pig.service';
 import { UserService } from '../service/user/user.service';
