@@ -9,6 +9,7 @@ export const databaseProviders = [
       mongoose.connect('mongodb://localhost/zhuzhu', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useCreateIndex: true,
       }),
   },
 ];

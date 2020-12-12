@@ -1,12 +1,13 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AUTH_JWT } from '../constant/strategy.const';
 import { User } from '../decorator/user.decorator';
 import { AuthLoginDto } from '../dto/auth.dto';
 import { AuthService } from '../service/auth/auth.service';
 import { AuthLoginVo, AuthUser } from '../vo/auth.vo';
 
+@ApiTags('auth')
 @ApiBearerAuth()
 @Controller('auth')
 export class AuthController {
