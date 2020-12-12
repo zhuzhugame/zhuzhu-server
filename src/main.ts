@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
   FastifyAdapter,
@@ -13,5 +14,6 @@ async function bootstrap() {
   );
   loadSwagger(app);
   await app.listen(3000, '0.0.0.0');
+  Logger.log(`Listening at http://localhost:${3000}/`);
 }
 bootstrap();
