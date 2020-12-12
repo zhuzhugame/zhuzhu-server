@@ -11,7 +11,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AUTH_JWT } from '../constant/strategy.const';
 import { User } from '../decorator/user.decorator';
 import { FightSaveDto, FightStartDto } from '../dto/fight.dto';
-import { FightService } from '../service/fight/Fight.service';
+import { FightService } from '../service/fight/fight.service';
 import { AuthUser } from '../vo/auth.vo';
 
 @ApiTags('fight')
