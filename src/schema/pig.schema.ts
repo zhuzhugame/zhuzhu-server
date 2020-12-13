@@ -6,6 +6,7 @@ export const PigSchema = new mongoose.Schema(
     shortId: { type: String, length: 10, required: true },
     userId: { type: String, length: 32, required: true },
     name: { type: String, length: 5, required: true },
+    money: { type: Number, length: 11, required: true },
     health: { type: Number, length: 11, required: true },
     simple: { type: Number, length: 11, required: true },
     fat: { type: Number, length: 11, required: true },
@@ -29,6 +30,7 @@ export class Pig {
   readonly userId: string;
   readonly shortId: string;
   readonly name: string;
+  readonly money: number;
   readonly health: number;
   readonly simple: number;
   readonly fat: number;

@@ -11,7 +11,12 @@ export class PigService {
 
   async create(dto: PigCreateDto, userId: string): Promise<Pig> {
     return this.pigDao.create(
-      Object.assign(dto, { userId, shortId: makeShortId(), _id: makeId() }),
+      Object.assign(dto, {
+        userId,
+        shortId: makeShortId(),
+        _id: makeId(),
+        money: 0,
+      }),
     );
   }
 

@@ -18,6 +18,7 @@ export class AuthService {
     const user = await this.userService.findByAccount(authLoginDto.account);
     if (user && user.password === authLoginDto.password) {
       const pig = await this.pigService.findByUserIdOrThrow(user._id);
+      const expiresIn = '5d';
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       return {
         accessToken: this.jwtService.sign(
@@ -27,12 +28,13 @@ export class AuthService {
           },
           {
             secret: CONFIG.JWT_SECRET,
-            expiresIn: '5d',
+            expiresIn,
             audience: 'zhuzhu',
             issuer: 'zhuzhu',
             privateKey: CONFIG.PRIVATE_KEY,
           },
         ),
+        expiresIn,
       };
     }
     throw new UnauthorizedException();

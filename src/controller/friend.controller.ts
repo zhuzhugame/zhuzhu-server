@@ -7,6 +7,7 @@ import { FriendAddDto } from '../dto/friend.dto';
 import { Friend } from '../schema/friend.schema';
 import { FriendService } from '../service/friend/friend.service';
 import { AuthUser } from '../vo/auth.vo';
+import { FriendVo } from '../vo/friend.vo';
 
 @ApiTags('friend')
 @ApiBearerAuth()
@@ -24,7 +25,7 @@ export class FriendController {
   }
 
   @Get()
-  async findAll(@User() user: AuthUser): Promise<Friend[]> {
+  async findAll(@User() user: AuthUser): Promise<FriendVo[]> {
     return this.friendService.findAllVo(user.pigId);
   }
 }

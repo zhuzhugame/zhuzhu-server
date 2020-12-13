@@ -1,5 +1,6 @@
 export class AuthLoginVo {
   readonly accessToken: string;
+  readonly expiresIn: string;
 }
 
 export class AuthUser {

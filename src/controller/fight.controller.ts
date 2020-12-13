@@ -8,10 +8,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AUTH_JWT } from '../constant/strategy.const';
 import { User } from '../decorator/user.decorator';
-import { FightSaveDto, FightStartDto } from '../dto/fight.dto';
+import { FightSaveDto } from '../dto/fight.dto';
 import { FightService } from '../service/fight/fight.service';
 import { AuthUser } from '../vo/auth.vo';
 import { FightStatVo } from '../vo/fight.vo';
@@ -28,13 +28,14 @@ export class FightController {
     return this.fightService.stat(user.pigId);
   }
 
+  @ApiOperation({ description: '匹配开始一场战斗' })
   @HttpCode(HttpStatus.OK)
   @Post('start')
-  async start(
-    @Body() body: FightStartDto,
-    @User() user: AuthUser,
-  ): Promise<void> {
-    return this.fightService.start(user.pigId, body.enemyPigId);
+  async start(@User() user: AuthUser): Promise<void> {
+    return this.fightService.start(
+      user.pigId,
+      '65d3c56414ee2f980eb3ce2f71bb0b4f',
+    );
   }
 
   @HttpCode(HttpStatus.OK)
