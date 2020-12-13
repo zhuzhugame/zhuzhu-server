@@ -24,7 +24,7 @@ export class FightController {
   constructor(private readonly fightService: FightService) {}
 
   @Get('stat')
-  async stat(@User() user: AuthUser): Promise<FightStatVo> {
+  async stat(@User() user: AuthUser): Promise<FightStatVo | null> {
     return this.fightService.stat(user.pigId);
   }
 

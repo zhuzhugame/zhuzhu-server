@@ -19,9 +19,9 @@ export class FightService {
     private readonly pigService: PigService,
   ) {}
 
-  async stat(pigId: string): Promise<FightStatVo> {
+  async stat(pigId: string): Promise<FightStatVo | null> {
     const fight = await this.fightDao.find({ pigId });
-    if (!fight) throw new NotFoundException();
+    if (!fight) return null;
     const { pigInfo, enemyPigInfo, processes } = fight;
     return { pigInfo, enemyPigInfo, processes };
   }
@@ -48,12 +48,9 @@ export class FightService {
   }
 
   async save(pigId: string, newProcess: any): Promise<void> {
-    const fight = await this.fightDao.find({ pigId });
-    if (!fight) throw new InternalServerErrorException();
-    fight.processes.push(newProcess);
     const result = await this.fightDao.update(
       { pigId },
-      { processes: fight.processes },
+      { $push: { processes: newProcess } },
     );
     if (!result) throw new InternalServerErrorException();
   }
