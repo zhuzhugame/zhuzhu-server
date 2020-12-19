@@ -19,7 +19,7 @@ export class PigController {
     @Query('value') value: string,
     @User() user: AuthUser,
   ): Promise<Pig[]> {
-    return this.pigService.searchBySidOrName(value, user.pigId);
+    return this.pigService.searchBySidOrName(value, [user.pigId]);
   }
 
   @Get('my')

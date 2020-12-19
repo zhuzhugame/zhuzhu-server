@@ -35,11 +35,14 @@ export class PigService {
     return this.pigDao.findAll({ _id: { $in: ids } });
   }
 
-  async searchBySidOrName(value: string, excludePigId: string): Promise<Pig[]> {
+  async searchBySidOrName(
+    value: string,
+    excludePigIds: string[],
+  ): Promise<Pig[]> {
     return this.pigDao.findAll(
       {
         $or: [{ shortId: value }, { name: { $regex: value } }],
-        _id: { $ne: excludePigId },
+        _id: { $nin: excludePigIds },
       },
       { limit: 20 },
     );
