@@ -4,6 +4,7 @@ import { PassportModule } from '@nestjs/passport';
 import { CONFIG } from '../config';
 import { AuthService } from '../service/auth/auth.service';
 import { JwtStrategy } from '../service/auth/jwt.strategy';
+import { EquipmentService } from '../service/equipment/equipment.service';
 import { FightService } from '../service/fight/fight.service';
 import { FriendService } from '../service/friend/friend.service';
 import { PigService } from '../service/pig/pig.service';
@@ -16,6 +17,7 @@ const providers: Provider[] = [
   PigService,
   FriendService,
   FightService,
+  EquipmentService,
 ];
 providers.push(JwtStrategy);
 
