@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  forwardRef,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { PigEquipmentDao } from '../../dao/pigEquipment.dao';
 import { Equipment } from '../../schema/equipment.schema';
 import { PigEquipment } from '../../schema/pigEquipment.schema';
@@ -13,8 +18,9 @@ export class PigEquipmentService {
   constructor(
     private readonly pigEquipmentDao: PigEquipmentDao,
     private readonly equipmentService: EquipmentService,
+    @Inject(forwardRef(() => PigService))
     private readonly pigService: PigService,
-  ) { }
+  ) {}
 
   async findAll(pigId: string): Promise<PigEquipment[]> {
     return this.pigEquipmentDao.findAll({
@@ -24,6 +30,14 @@ export class PigEquipmentService {
 
   async findAllVos(pigId: string): Promise<PigEquipmentVo[]> {
     const pigEquipments = await this.findAll(pigId);
+    return this.makeVos(pigEquipments);
+  }
+
+  async findAllVosOfCarrying(pigId: string): Promise<PigEquipmentVo[]> {
+    const pigEquipments = await this.pigEquipmentDao.findAll({
+      pigId,
+      carrying: true,
+    });
     return this.makeVos(pigEquipments);
   }
 

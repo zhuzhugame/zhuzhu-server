@@ -24,6 +24,6 @@ export class PigController {
 
   @Get('my')
   async getMy(@User() user: AuthUser): Promise<Pig> {
-    return this.pigService.findByUserIdOrThrow(user.userId);
+    return this.pigService.findVoByUserIdOrThrow(user.userId);
   }
 }

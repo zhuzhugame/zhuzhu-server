@@ -37,11 +37,6 @@ export class Pig {
   readonly clean: number;
   readonly solid: number;
   readonly power: number;
-  readonly weaponId?: string | null;
-  readonly capId?: string | null;
-  readonly cloakId?: string | null;
-  readonly clothesId?: string | null;
-  readonly shoeId?: string | null;
   readonly createdAt?: Date;
   readonly updatedAt?: Date;
 }
