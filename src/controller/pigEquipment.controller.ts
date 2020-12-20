@@ -28,4 +28,12 @@ export class PigEquipmentController {
   async unwear(@Param('id') id: string, @User() user: AuthUser): Promise<void> {
     return this.pigEquipmentService.unwear(id, user.pigId);
   }
+
+  @Post('pig_equipments/:id/refine')
+  async refine(
+    @Param('id') id: string,
+    @User() user: AuthUser,
+  ): Promise<{ result: string }> {
+    return this.pigEquipmentService.refine(id, user.pigId);
+  }
 }

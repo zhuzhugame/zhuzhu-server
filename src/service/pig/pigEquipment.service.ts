@@ -3,6 +3,7 @@ import {
   forwardRef,
   Inject,
   Injectable,
+  NotFoundException,
 } from '@nestjs/common';
 import { PigEquipmentDao } from '../../dao/pigEquipment.dao';
 import { Equipment } from '../../schema/equipment.schema';
@@ -12,6 +13,7 @@ import { PigEquipmentVo } from '../../vo/pigEquipment.vo';
 import { EquipmentService } from '../equipment/equipment.service';
 import { PigService } from './pig.service';
 import * as _ from 'lodash';
+import { calcRefine } from '../../provider/calc/refine.calc';
 
 @Injectable()
 export class PigEquipmentService {
@@ -113,5 +115,27 @@ export class PigEquipmentService {
         carrying: false,
       },
     );
+  }
+
+  // TODO: 锁
+  async refine(id: string, pigId: string): Promise<{ result: string }> {
+    const pigEquipment = await this.pigEquipmentDao.find({
+      _id: id,
+      pigId,
+    });
+    if (pigEquipment == null) throw new NotFoundException();
+    const { value: refineLv, message: result } = calcRefine(
+      pigEquipment.refineLv,
+    );
+    await this.pigEquipmentDao.update(
+      {
+        _id: id,
+        pigId,
+      },
+      {
+        refineLv,
+      },
+    );
+    return { result };
   }
 }
