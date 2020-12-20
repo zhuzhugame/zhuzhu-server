@@ -8,6 +8,7 @@ import { EquipmentService } from '../service/equipment/equipment.service';
 import { FightService } from '../service/fight/fight.service';
 import { FriendService } from '../service/friend/friend.service';
 import { PigService } from '../service/pig/pig.service';
+import { PigEquipmentService } from '../service/pig/pigEquipment.service';
 import { UserService } from '../service/user/user.service';
 import { DaoModule } from './dao.module';
 
@@ -18,6 +19,7 @@ const providers: Provider[] = [
   FriendService,
   FightService,
   EquipmentService,
+  PigEquipmentService,
 ];
 providers.push(JwtStrategy);
 

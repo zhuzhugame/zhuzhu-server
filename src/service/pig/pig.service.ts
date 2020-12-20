@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import * as _ from 'lodash';
 import { PigDao } from '../../dao/pig.dao';
 import { PigCreateDto } from '../../dto/pig.dto';
@@ -46,5 +50,19 @@ export class PigService {
       },
       { limit: 20 },
     );
+  }
+
+  async findByIdOrThrow(pigId: string): Promise<Pig> {
+    const pig = await this.pigDao.find({ _id: pigId });
+    if (pig == null) throw new NotFoundException();
+    return pig;
+  }
+
+  // TODO: 锁
+  async subtractMoney(value: number, pigId: string): Promise<void> {
+    const pig = await this.findByIdOrThrow(pigId);
+    const endMoney = pig.money - value;
+    if (endMoney < 0) throw new BadRequestException('钱不够');
+    await this.pigDao.update({ _id: pigId }, { money: endMoney });
   }
 }

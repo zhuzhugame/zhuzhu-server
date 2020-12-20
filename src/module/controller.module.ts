@@ -4,6 +4,7 @@ import { EquipmentController } from '../controller/equipment.controller';
 import { FightController } from '../controller/fight.controller';
 import { FriendController } from '../controller/friend.controller';
 import { PigController } from '../controller/pig.controller';
+import { PigEquipmentController } from '../controller/pigEquipment.controller';
 import { ServiceModule } from './service.module';
 
 @Module({
@@ -14,6 +15,7 @@ import { ServiceModule } from './service.module';
     PigController,
     FightController,
     EquipmentController,
+    PigEquipmentController,
   ],
 })
 export class ControllerModule {}

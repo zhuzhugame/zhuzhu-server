@@ -5,6 +5,7 @@ export const EquipmentSchema = new mongoose.Schema(
     _id: { type: String, length: 32, required: true },
     name: { type: String, length: 40, required: true },
     type: { type: String, length: 40, required: true },
+    baseMoney: { type: Number, required: true },
     sale: { type: Boolean, required: true },
     desc: { type: String, required: true },
     imgId: { type: String, length: 32, required: true },
@@ -38,6 +39,7 @@ export class Equipment {
   readonly name: string;
   readonly desc: string;
   readonly type: string;
+  readonly baseMoney: number;
   readonly sale: boolean;
   readonly imgId: string;
   readonly health: number;
